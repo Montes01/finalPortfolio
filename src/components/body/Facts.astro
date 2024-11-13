@@ -1,0 +1,31 @@
+---
+import { facts } from "@constants";
+import FactCard from "@cards/FactCard.tsx";
+---
+
+<main class="flex flex-col px-12 smaller:px-5 pt-16">
+  <section
+    class="flex flex-wrap justify-center items-center gap-12 py-20 text-white"
+  >
+    {
+      facts.map((el) => (
+        <FactCard client:load text={el.text} value={el.value} />
+      ))
+    }
+  </section>
+</main>
+
+<style>
+  section {
+    animation: appear linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 20%;
+  }
+
+  @keyframes appear {
+    from {
+      opacity: 0;
+      scale: 0.8;
+    }
+  }
+</style>

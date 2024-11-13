@@ -1,0 +1,55 @@
+---
+import ImageHover from "@components/General/ImageHover.astro";
+import { IconBrandGithub, IconLink } from "@tabler/icons-react";
+import { type project } from "@types";
+interface Props extends project {
+  children?: JSX.Element;
+}
+const {
+  name,
+  description,
+  deployUrl,
+  githubUrl,
+  image,
+  technologies,
+  children,
+} = Astro.props;
+---
+
+<article
+  class="flex flex-col justify-between relative dark:text-secondary-dark dark:backdrop-brightness-110 backdrop-brightness-90 text-secondary-light gap-6 w-96 smaller:w-72 tiny:w-64 p-3 box-border h-[520px] min-h-[300px] rounded-xl"
+>
+  <section class="flex flex-col gap-5 justify-start">
+    <div class="h-40 w-full rounded-xl relative">
+      <img src={image} class="w-full h-full object-cover rounded-xl" alt="" />
+      <ImageHover deployUrl={deployUrl} />
+    </div>
+    <strong>{name}</strong>
+    <p class="max-w-text-short text-ellipsis tiny:text-xs">{description}</p>
+  </section>
+  {
+    (
+      <section
+        class:list={[
+          "flex gap-7 dark:backdrop-brightness-90 backdrop-brightness-110 p-3 w-5/6 flex-wrap",
+          { "visibility-hidden": technologies.length < 1 },
+        ]}
+      >
+        {technologies!.map((el) => (
+          <el.icon className={el.className ?? ""} />
+        ))}
+        {children}
+      </section>
+    )
+  }
+  <a
+    href={githubUrl}
+    title={name}
+    target="_blank"
+    class="absolute right-3 bottom-3 p-1 dark:bg-secondary-dark/20 hover:scale-110 transition-transform ease-linear bg-secondary-light/20 rounded-xl"
+  >
+    <IconBrandGithub
+      className="dark:text-secondary-dark text-secondary-light"
+    />
+  </a>
+</article>

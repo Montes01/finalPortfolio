@@ -1,0 +1,50 @@
+---
+import ProjectCard from "@components/cards/ProjectCard.astro";
+import { projects, technology } from "@constants";
+---
+
+<section class="flex flex-col max-w-limit p-12 smaller:px-5 gap-9 items-center">
+  <div class="flex gap-7 justify-start w-full items-center tiny:justify-center">
+    <h2
+      class="text-4xl font-bold dark:text-secondary-dark text-secondary-light"
+    >
+      Projects
+    </h2>
+    <div
+      class="flex-grow h-[1px] bg-neon/40 shadow-basic dark:shadow-javascript shadow-html tiny:hidden"
+    >
+    </div>
+  </div>
+  <section
+    id="pro"
+    class="flex flex-wrap gap-12 justify-center items-center p-12 smaller:px-1 overflow-x-hidden"
+  >
+    {
+      projects.map((el) => (
+        <ProjectCard
+          name={el.name}
+          description={el.description}
+          image={el.image}
+          githubUrl={el.githubUrl}
+          deployUrl={el.deployUrl}
+          technologies={el.technologies}
+      />
+      ))
+    }
+  </section>
+</section>
+
+<style is:global>
+  h2 {
+    animation: appear linear both;
+    animation-timeline: view();
+    animation-range: entry 30% cover 40%;
+  }
+
+  @keyframes appear {
+    from {
+      opacity: 0;
+      scale: 0.8;
+    }
+  }
+</style>

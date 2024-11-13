@@ -1,0 +1,21 @@
+---
+import { type TablerIconsProps } from "@tabler/icons-react";
+interface Props {
+  Icon: (e: TablerIconsProps) => JSX.Element;
+  className: string;
+  link?: string;
+  file?: string;
+  target: "_blank" | "_self";
+}
+const { Icon, className, link, file, target } = Astro.props;
+---
+
+<a
+  class={className}
+  download={file}
+  href={link ?? "#"}
+  target={target}
+  title={link}
+>
+  <Icon className="w-12 h-12 p-1 m-0 bg-transparent" />
+</a>

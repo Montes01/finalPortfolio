@@ -1,0 +1,25 @@
+---
+import { IconLink } from "@tabler/icons-react";
+interface Props {
+  deployUrl?: string;
+}
+const { deployUrl } = Astro.props;
+---
+
+{
+  deployUrl ? (
+    <a
+      href={deployUrl}
+      target="_blank"
+      class="absolute z-10 grid place-content-center w-full h-full top-0 backdrop-brightness-[0.3] opacity-0 hover:opacity-100 transition-opacity"
+    >
+      <IconLink className="h-9 w-9 text-white font-black" />
+    </a>
+  ) : (
+    <div class="absolute z-10 grid place-content-center w-full h-full top-0 backdrop-brightness-[0.3] opacity-0 hover:opacity-100 transition-opacity">
+      <span class="font-bold text-white text-center tiny:text-sm select-none text-xl drop-shadow-[0_2px_2px_black]">
+        This project is not deployed yet
+      </span>
+    </div>
+  )
+}
